@@ -1,0 +1,27 @@
+<div style="font-family: Arial, Helvetica, sans-serif;">
+    <nav style="display: flex; flex-direction: row; height: 10vh; align-items: center; background-color: rgb(234, 234, 234); padding: 1rem; box-sizing: border-box; 
+                box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15), inset 0 -1px 0 rgba(255,255,255,0.15); font-weight: bold;">
+        <img src="../assets/reddit-subreddit.png" style="width: 60px; max-height: 100%; cursor: pointer;" (click)="gotoHome()"/>
+        <div class="small-screen-hidden" style="flex-grow: 1; margin-left: 10px; font-weight: bold; font-size: 30px; cursor: pointer;" (click)="gotoHome()">
+            Subreddit-Subreddit
+        </div>
+        <div *ngIf="currentUser.currentlyloggedIn != 'anonymous'" style="margin: 20px; font-size: 17px; cursor: pointer;"
+            (click)="gotoProfile()">{{currentUser.currentlyloggedIn}} {{currentUser.loginUsername}} </div>
+        <button *ngIf="currentUser.currentlyloggedIn == 'admin'" style="margin: 20px; font-size: 17px; cursor: pointer;"
+            (click)="gotoPendingReports()">Pending Reports</button>
+        <button *ngIf="currentUser.currentlyloggedIn == 'anonymous'" style="margin: 20px; font-size: 17px; cursor: pointer;"
+            (click)="gotoLogin()">Login</button>
+        <button *ngIf="currentUser.currentlyloggedIn != 'anonymous'" style="margin: 20px; font-size: 17px; cursor: pointer;"
+            (click)="logout()">Logout</button>
+        <input type="text" placeholder="Search Subreddit" style="border-radius: 10px; flex-grow: 1; min-width: 0px; border: none; padding: 8px; font-size: 20px"
+            [(ngModel)]="currentSearch" (keyup.enter)="search()" />
+    </nav>
+    <div style="height: 90vh; overflow-y: scroll; overflow-x: hidden;">
+        <main style="min-height: 1000px">
+            <router-outlet></router-outlet>
+        </main>
+        <footer style="background-color: rgb(234, 234, 234); font-size: 7px; padding: 0.5rem;">
+            Copyright Ivan Rudyakov 2023.
+        </footer>
+    </div>
+</div>

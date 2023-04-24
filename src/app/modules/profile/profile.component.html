@@ -1,0 +1,72 @@
+<div style="display: flex; flex-direction: column; align-items: center;">
+    <div *ngIf="!isLoading; else loadingScreen" style="width: 65%; border-radius: 10px; background-color: rgb(221, 234, 238); padding: 1rem; margin: 1rem">
+
+        <h1>{{profile.loginUsername}} Profile</h1>
+
+        <p *ngIf="!(isSelf || ownProfile.currentlyloggedIn == 'admin')" style="font-size: 20px;">
+            {{profile.commenter.bio}}
+        </p>
+
+        <div *ngIf="ownProfile.currentlyloggedIn == 'admin' && ownProfile.admin.isSuperAdmin"
+            style="display: flex; flex-direction: row;">
+            <button *ngIf="!profile.rolesAvailable.includes('admin')" (click)="elevateAdmin()">Elevate To Admin</button> <button *ngIf="profile.rolesAvailable.includes('admin') && !profile.admin.isSuperAdmin" (click)="elevateSuperAdmin()">Elevate To
+                Super Admin</button>
+            <!-- <button>Delete User</button> -->
+        </div>
+
+        <div *ngIf="profile.profilePublic || ownProfile.currentlyloggedIn == 'admin' || isSelf; else profilePrivate"
+            style="margin: 1rem">
+            <div class="profile-form" *ngIf="profile._id !== undefined">
+                <label for="id" class="profile-label">ID: </label>
+                <input id="id" type="text" [disabled]="true" [ngModel]="profile._id" class="profile-control" />
+            </div>
+            <div class="profile-form" *ngIf="profile.password !== undefined">
+                <label for="password" class="profile-label">Password: </label>
+                <input id="password" type="text" [disabled]="!(isSelf || ownProfile.currentlyloggedIn == 'admin')"
+                    [(ngModel)]="profile.password" class="profile-control" />
+            </div>
+            <div class="profile-form" *ngIf="profile.dateCreated !== undefined">
+                <label for="dateCreated" class="profile-label">Date Created: </label>
+                <input id="dateCreated" type="text" [disabled]="true" [(ngModel)]="profile.dateCreated"
+                    class="profile-control" />
+            </div>
+            <!-- <div class="profile-form" *ngIf="profile.profilePublic !== undefined">
+                <label for="profilePublic" class="profile-label">Is Profile Public: </label>
+                <input id="profilePublic" type="text" [disabled]="!(isSelf || ownProfile.currentlyloggedIn == 'admin')"
+                    [(ngModel)]="profile.profilePublic" class="profile-control" />
+            </div> -->
+            <div class="profile-form" *ngIf="profile.rolesAvailable !== undefined">
+                <label for="roles" class="profile-label">Given Roles: </label>
+                <input id="roles" type="text" [disabled]="true" [ngModel]="profile.rolesAvailable.join(' ')"
+                    class="profile-control" />
+            </div>
+            <div class="profile-form" *ngIf="profile.commenter.shownUsername !== undefined">
+                <label for="commentUsername" class="profile-label">Comment Username: </label>
+                <input id="commentUsername" type="text"
+                    [disabled]="!(isSelf || ownProfile.currentlyloggedIn == 'admin')"
+                    [(ngModel)]="profile.commenter.shownUsername" class="profile-control" />
+            </div>
+            <div class="profile-form" *ngIf="profile.commenter.bio !== undefined && (isSelf || ownProfile.currentlyloggedIn == 'admin')">
+                <label for="bio" class="profile-label">Bio: </label>
+                <textarea id="bio" type="text" [disabled]="!(isSelf || ownProfile.currentlyloggedIn == 'admin')" 
+                          [(ngModel)]="profile.commenter.bio" class="profile-control"></textarea>
+                <!-- <input id="bio" type="text" [disabled]="!(isSelf || ownProfile.currentlyloggedIn == 'admin')"
+                    [(ngModel)]="profile.commenter.bio" class="profile-control" /> -->
+            </div>
+            <div class="profile-form" *ngIf="profile.admin.isSuperAdmin !== undefined && ownProfile.currentlyloggedIn == 'admin'">
+                <label for="superAdmin" class="profile-label">Is Super Admin: </label>
+                <input id="superAdmin" type="text" [disabled]="true" [(ngModel)]="profile.admin.isSuperAdmin"
+                    class="profile-control" />
+            </div>
+            <button *ngIf="isSelf || ownProfile.currentlyloggedIn == 'admin'" style="font-size: 20px;" (click)="submit()">Submit</button>
+        </div>
+    </div>
+</div>
+
+<ng-template #loadingScreen>
+    <h1>Loading... </h1>
+</ng-template>
+
+<ng-template #profilePrivate>
+    <h2>Profile is set to private. </h2>
+</ng-template>

@@ -1,0 +1,60 @@
+<ng-container *ngIf="comments.length > 0; else noComments">
+    <div *ngFor="let comment of comments"
+        style="padding: 0.5rem; margin-top: 10px; background-color: rgb(181, 195, 206); 
+               border: 2px; border-color: black; border-radius: 10px; min-height: 100px;">
+        <div style="font-weight: bold;">
+            <span *ngIf="showHandle" style="margin-right: 10px; font-size: 20px; cursor: pointer;"
+                (click)="gotoSubreddit(comment.subredditHandle)">r/{{comment.subredditHandle}} -</span>
+            <span style="cursor: pointer;"
+                (click)="gotoProfile(comment.commenter._id)">{{comment.commenter.commenter.shownUsername}}</span>
+        </div>
+        <div style='display: flex; flex-direction: row;'>
+            <div style="display: flex; flex-direction: column;">
+                <i *ngIf="calculateLikeState(comment._id) != 'like' && ownUser.currentlyloggedIn == 'commenter'"
+                    (click)="upvote(comment._id)" style="margin-top: 15px; cursor: pointer;" class="fa-regular fa-circle-up fa-xl"></i>
+                <i *ngIf="calculateLikeState(comment._id) == 'like' && ownUser.currentlyloggedIn == 'commenter'"
+                    (click)="upvote(comment._id)" style="margin-top: 15px; cursor: pointer;" class="fa-solid fa-circle-up fa-xl"></i>
+                <div style="display: flex; flex-direction: column; align-items: center; width: 100%">
+                    <p>{{comment.likes}}</p>
+                </div>
+                <i *ngIf="calculateLikeState(comment._id) != 'dislike' && ownUser.currentlyloggedIn == 'commenter'"
+                    (click)="downvote(comment._id)" style="cursor: pointer;" class="fa-regular fa-circle-down fa-xl"></i>
+                <i *ngIf="calculateLikeState(comment._id) == 'dislike' && ownUser.currentlyloggedIn == 'commenter'"
+                    (click)="downvote(comment._id)" style="cursor: pointer;" class="fa-solid fa-circle-down fa-xl"></i>
+            </div>
+            <div style="margin-left: 15px; flex-grow: 1;">
+                <div style="margin-top: 0.5rem">
+                    {{comment.comment}}
+                </div>
+                <div style="font-weight: bold; margin-top: 15px">
+                    <i *ngIf="calculateLikeState(comment._id) != 'like'" class="fa-thin fa-up"></i> <i
+                        *ngIf="calculateLikeState(comment._id) == 'like'" class="fa-solid fa-up"></i>
+                    <button *ngIf="ownUser.currentlyloggedIn == 'commenter' && comment.commenter._id != ownUser._id"
+                        (click)="toggleReport(comment._id)">Report
+                    </button>
+                    <button *ngIf="ownUser.currentlyloggedIn == 'admin' || comment.commenter._id == ownUser._id"
+                        (click)="remove(comment._id)">Delete
+                    </button>
+                    <button *ngIf="ownUser.currentlyloggedIn == 'admin' || comment.commenter._id == ownUser._id"
+                        (click)="edit(comment._id, comment.comment)">Edit
+                    </button>
+                </div>
+                <div *ngIf="comment._id == reportVisible">
+                    <textarea placeholder="Report Description" style='width: 35%; height: 70px; display: block'
+                        [(ngModel)]="reportText"></textarea>
+                    <button (click)="submitReport()">Submit Report</button>
+                </div>
+                <div *ngIf="comment._id == editVisible">
+                    <textarea placeholder="Edit Comment" style='width: 35%; height: 70px; display: block'
+                        [(ngModel)]="editText"></textarea>
+                    <button (click)="submitEdit()">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+
+<ng-template #noComments>
+    <h1>There appear to be no comments. You could be the first!</h1>
+</ng-template>

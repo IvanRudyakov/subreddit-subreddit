@@ -1,0 +1,33 @@
+<div *ngIf="!isLoading; else loadingScreen"
+    style="display: flex; flex-direction: column; align-items: center; padding: 1rem;">
+    <div *ngIf="ownUser.currentlyloggedIn == 'admin'; else notAdminScreen" style="width: 65%">
+        <div *ngFor="let report of reports"
+            style="padding: 0.5rem; margin-top: 10px; background-color: rgb(181, 195, 206); border: 2px; border-color: black; border-radius: 10px;">
+            <div style="font-weight: bold;">
+                <span style="font-weight: bold; font-size: 20px; color: rgb(0, 0, 140); cursor: pointer;" (click)="gotoUser(report.reporter._id)">
+                    {{report.reporter.loginUsername}}
+                </span> Reported <span style="font-weight: bold; font-size: 20px; color: rgb(0, 0, 140); cursor: pointer;" (click)="gotoUser(report.reporter._id)">
+                    {{report.comment.commenter.commenter.shownUsername}}
+                </span> for <span style="font-style: italic; font-size: 20px; color: rgb(0, 0, 140)">
+                    '{{report.reportDescription}}':
+                </span>
+            </div>
+            <div style="margin-left: 15px; margin: 0.5rem">
+                <div>
+                    {{report.comment.comment}}
+                </div>
+                <div style="margin-top: 10px;">
+                    <button (click)="accept(report._id, report.comment._id)" style="margin-right: 10px;">Accept </button> <button (click)="reject(report._id, report.comment._id)">Reject </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #notAdminScreen>
+    <h1>You are not an admin </h1>
+</ng-template>
+
+<ng-template #loadingScreen>
+    <h1>Loading... </h1>
+</ng-template>

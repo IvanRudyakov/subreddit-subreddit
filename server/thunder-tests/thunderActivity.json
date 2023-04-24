@@ -1,0 +1,59 @@
+[
+  {
+    "_id": "b55e59f8-261a-4483-b853-bd9d77fdbb1c",
+    "colId": "history",
+    "containerId": "",
+    "name": "localhost:4000/app/register",
+    "url": "localhost:4000/api/users/register",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-04-23T04:18:24.331Z",
+    "modified": "2023-04-23T04:20:37.216Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"username\": \"test\",\n  \"password\": \"test\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "59cc72c1-0b56-45c5-96e1-b3dc1b51c97b",
+    "colId": "history",
+    "containerId": "",
+    "name": "localhost:4001/app/register",
+    "url": "localhost:4001/app/register",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-04-23T04:18:43.075Z",
+    "modified": "2023-04-23T04:18:43.075Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"username\": \"test\",\n  \"password\": \"test\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "2863dd73-0e3c-43ca-922b-49ed3b60cb15",
+    "colId": "history",
+    "containerId": "",
+    "name": "localhost:4002/app/register",
+    "url": "localhost:4002/app/register",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-04-23T04:18:48.105Z",
+    "modified": "2023-04-23T04:18:48.105Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"username\": \"test\",\n  \"password\": \"test\"\n}",
+      "form": []
+    },
+    "tests": []
+  }
+]

@@ -1,0 +1,24 @@
+<div style="display: flex; flex-direction: column; align-items: center;">
+    <div *ngFor="let subreddit of subreddits" (click)="gotoSubreddit(subreddit.handle)"
+        style="padding: 0.5rem; width: 65%; cursor: pointer; margin-top: 10px; background-color: rgb(181, 195, 206); border: 2px; border-color: black; border-radius: 10px;">
+        <div style="font-weight: bold; display: flex; flex-direction: row; font-size: 18px; align-items: center;">
+            <div style="font-size: 25px; margin-right: 10px">{{subreddit.name}}</div>
+            <div style="margin-right: 10px">r/{{subreddit.handle}}</div>
+            <div style="margin-right: 10px">{{subreddit.subscribers}} Members</div>
+            <div style="margin-right: 10px" *ngIf="subreddit.isNSFW">(NSFW)</div>
+        </div>
+        <div style="margin-left: 15px; margin: 0.5rem">
+            {{subreddit.description}}
+        </div>
+    </div>
+</div>
+
+<!-- <div *ngIf="!isLoading; else loadingScreen" style="width: 65%;">
+    <div *ngFor="let subreddit of subreddits" style="display: flex; flex-direction: row; margin: 5px; background-color: lightgray; border: 2px; border-color: black; border-radius: 2px; ">
+        <div>{{subreddit.name}}</div> <div>r/{{subreddit.handle}}</div> <div>{{subreddit.subscribers}}</div>
+    </div>
+</div> -->
+
+<ng-template #loadingScreen>
+    <h1>Loading... </h1>
+</ng-template>

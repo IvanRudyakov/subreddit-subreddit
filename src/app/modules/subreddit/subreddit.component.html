@@ -1,0 +1,23 @@
+<div *ngIf="!isLoading; else loadingScreen"
+    style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+    <div
+        style="width: 65%; background-color: rgb(221, 234, 238); margin-top: 30px; margin-bottom: 30px; padding: 10px; box-shadow: 0 0.5rem 1rem rgba(76, 38, 230, 0.15), inset 0 -1px 0 rgba(141, 64, 242, 0.15);">
+        <div style="margin-top: 20px; font-size: 50px">
+            r/{{handle}}
+        </div>
+        <div *ngIf="ownUser.currentlyloggedIn == 'commenter'"
+            style="margin-top: 20px; display: flex; flex-direction: column;">
+            <label for="new-comment" style="font-size: 16px;">comment as <span
+                    style="font-weight: bold; font-size: 20px; color: rgb(0, 0, 140)">{{ownUser.commenter.shownUsername}}</span></label>
+            <textarea id='new-comment' [(ngModel)]="newComment" style="height: 100px"></textarea>
+            <!-- <input type="text" id="new-comment" [(ngModel)]="newComment"/>  -->
+            <div style='display: flex; flex-direction: row-reverse;'><button (click)="addComment()">Comment</button>
+            </div>
+        </div>
+        <comments [comments]="comments" [ownUser]="ownUser"></comments>
+    </div>
+</div>
+
+<ng-template #loadingScreen>
+    <h1>Loading... </h1>
+</ng-template>

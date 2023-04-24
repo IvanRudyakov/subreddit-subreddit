@@ -1,1 +1,53 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    margin: 0;
+}
+
+
+input {
+    border: 2px solid #dadada;
+    border-radius: 7px;
+    padding: 8px;
+    border-radius: 10px; 
+}
+
+input:focus { 
+    outline: none;
+    border-color: #9ecaed;
+    box-shadow: 0 0 10px #9ecaed;
+}
+
+textarea {
+    border: 2px solid #dadada;
+    border-radius: 7px;
+    padding: 8px;
+    border-radius: 10px; 
+}
+
+textarea:focus { 
+    outline: none;
+    border-color: #9ecaed;
+    box-shadow: 0 0 10px #9ecaed;
+}
+
+button {
+    border-radius: 20px;
+    padding: 5px 8px 5px 8px;
+    border: 1px solid #7d7d7d;
+    background-color: rgb(194, 194, 237);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(168, 168, 202);
+}
+
+button:active {
+    background-color: rgb(138, 138, 165);
+}
+
+@media (max-width: 1000px) {
+    .small-screen-hidden {
+        display: none;
+    }
+}

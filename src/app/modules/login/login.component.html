@@ -1,0 +1,20 @@
+<div style="display: flex; flex-direction: column; align-items: center; height: 90vh; overflow-y: auto;">
+    <div style="width: 45%; font-size: 19px; background-color: aliceblue; padding: 1rem; margin: 1rem; border-radius: 15px; border: 1px solid black;">
+        <h1>Subreddit-Subreddit Login: </h1>
+        <div *ngIf="messageOn">
+            Username or Password Incorrect
+        </div>
+        <div style="margin: 1rem">
+            <label for="username"> Username: </label> <input id="username" type="text" [(ngModel)]="username" />
+        </div>
+        <div style="margin: 1rem">
+            <label for="password"> Password: </label> <input id="password" type="text" [(ngModel)]="password" (keyup.enter)="submit()"/>
+        </div>
+        <button style="margin: 1rem" (click)="gotoRegister()">Register?</button>
+        <button style="margin-top: 1rem" (click)="submit()">Login</button>
+    </div>
+    <img src="../../../assets/reddit-subreddit.png" style="width: 20%; margin-top: 20px">
+</div>
+<footer style="background-color: rgb(234, 234, 234); height: 10vh; font-size: 7px; padding: 0.5rem;">
+    Copyright Ivan Rudyakov 2023.
+</footer>

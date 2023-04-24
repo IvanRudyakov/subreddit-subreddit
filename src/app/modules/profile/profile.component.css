@@ -1,0 +1,24 @@
+.profile-form {
+    display: flex;
+    flex-direction: row;
+    margin: 0.5rem; 
+    padding: 0.5rem; 
+    background-color: rgb(181, 195, 206);
+    border-color: black; 
+    border: 2px; 
+    border-radius: 10px;
+}
+
+.profile-label {
+    font-size: 26px;
+    width: 30%;
+    margin-right: 0.5rem;
+}
+
+.profile-control {
+    border: 2px;
+    border-color: black;
+    border-radius: 8px;
+    font-size: 26px;
+    width: 60%
+}
